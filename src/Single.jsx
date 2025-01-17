@@ -122,7 +122,7 @@ function Single({ user, myList, newList, setMyList, setNewList }) {
 
         // Add into database
         try {
-            const response = await fetch('http://localhost:3001/recipe/add', {
+            const response = await fetch('https://recipe-backend-1er1.onrender.com/recipe/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -11,7 +11,7 @@ function MyList({ user }) {
         const fetchRecipes = async () => {
             let account_id = user.id;
             try {
-                const response = await fetch('http://localhost:3001/recipe/mylist', {
+                const response = await fetch('https://recipe-backend-1er1.onrender.com/recipe/mylist', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ function MyList({ user }) {
             }
         };
         fetchRecipes();
-    }, []);
+    }, [account_id]);
 
     // Organize the data
     const organezeData = (data) => {
