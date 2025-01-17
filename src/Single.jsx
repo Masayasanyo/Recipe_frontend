@@ -458,17 +458,17 @@ function Single({ user, myList, newList, setMyList, setNewList }) {
 
             <div className='my-list-container'>
                 {newList.length > 0 ? (
-                newList.map((myRecipe, index) => (
-                <div className='my-recipe-container' key={index}>
-                    <h2>{myRecipe.title}</h2>
+                newList.map((myRecipe) => (
+                <div className='my-recipe-container' key={myRecipe.id}>
+                    <h2>{myRecipe.name}</h2>
                     <hr/>
                     <div className='label-container' >
-                    {myRecipe.label.map((l, index) => (
-                        <p className='label' key={index}>{l}</p>
+                    {myRecipe.label.map((l) => (
+                        <p className='label' key={l.id}>{l.name}</p>
                     ))}
                     </div>
                     <hr/>
-                    <img height='200px' src={myRecipe.image} alt={myRecipe.title} ></img>
+                    <img height='200px' src={myRecipe.image} alt={myRecipe.name} ></img>
                     <hr/>
                     <h3>{myRecipe.time} min</h3>
                     <hr/>
@@ -477,8 +477,8 @@ function Single({ user, myList, newList, setMyList, setNewList }) {
                     <div>
                         <h3>Material</h3>
                         <ul>
-                        {myRecipe.material.map((m, index) => (
-                            <li key={index}>{m.name} … {m.quantity}</li>
+                        {myRecipe.material.map((m) => (
+                            <li key={m.id}>{m.name} … {m.quantity}</li>
                         ))}
                         </ul>
                     </div>
@@ -486,8 +486,8 @@ function Single({ user, myList, newList, setMyList, setNewList }) {
                     <div>
                         <h3>Process</h3>
                         <div>
-                        {myRecipe.process.map((p, index) => (
-                            <p key={index}>{p.step}. {p.name}</p>
+                        {myRecipe.process.map((p) => (
+                            <p key={p.step}>{p.step}. {p.name}</p>
                         ))}
                         </div>
                     </div>
