@@ -30,6 +30,7 @@ function Login({ handleLogin }) {
             });
             if (response.ok) {
                 const data = await response.json();
+                console.log(data);
                 alert(`Success!: ${data.email}`);
                 handleLogin(data);
                 navigate('/setting');
