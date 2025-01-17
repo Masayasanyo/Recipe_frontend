@@ -31,8 +31,8 @@ function Login({ handleLogin }) {
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);
-                alert(`Success!: ${data.email}`);
-                handleLogin(data);
+                alert(`Success!: ${data.data.email}`);
+                handleLogin(data.data);
                 navigate('/setting');
             } else {
                 alert('Failed');
