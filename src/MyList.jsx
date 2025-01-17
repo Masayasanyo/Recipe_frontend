@@ -31,7 +31,7 @@ function MyList({ user }) {
             }
         };
         fetchRecipes();
-    }, [account_id]);
+    }, []);
 
     // Organize the data
     const organezeData = (data) => {
