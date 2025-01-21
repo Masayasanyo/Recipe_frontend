@@ -1,8 +1,9 @@
 import React from 'react';
 import { Routes, Route, Navigate} from 'react-router-dom';
-import Home from './Home';
-import MyList from './MyList';
-import Setting from './Setting';
+import Home from './home/Home';
+import MyList from './mylist/MyList';
+import Setting from './setting/Setting';
+import Recipe from './mylist/single/Recipe';
 
 
 function Main({ isLoggedIn, handleLogin, handleLogout, user }) {
@@ -20,7 +21,7 @@ function Main({ isLoggedIn, handleLogin, handleLogout, user }) {
               }
             />
             <Route 
-              path='/myList' 
+              path='/myList*' 
                 element={
                   isLoggedIn ? (
                     <MyList user={ user }/>

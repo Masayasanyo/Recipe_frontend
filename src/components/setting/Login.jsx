@@ -21,7 +21,8 @@ function Login({ handleLogin }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('https://recipe-backend-1er1.onrender.com/login', {
+            // const response = await fetch('https://recipe-backend-1er1.onrender.com/login', {
+            const response = await fetch('http://localhost:3001/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -24,7 +24,8 @@ function SignUp({ handleLogin }) {
         console.log("Form submitted");
         event.preventDefault();
         try {
-            const response = await fetch('https://recipe-backend-1er1.onrender.com/signup', {
+            // const response = await fetch('https://recipe-backend-1er1.onrender.com/signup', {
+            const response = await fetch('http://localhost:3001/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

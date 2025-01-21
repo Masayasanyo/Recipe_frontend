@@ -1,0 +1,11 @@
+.my-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-list-header {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px 20px 10px;
+    margin-top: 40px;
+}
