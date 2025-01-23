@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
   
-function Login({ handleLogin }) {
+function Login({ handleLogin, setLoginform}) {
 
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ function Login({ handleLogin }) {
                 console.log(data);
                 alert(`Success!: ${data.data.email}`);
                 handleLogin(data.data);
-                navigate('/setting');
+                navigate('/');
             } else {
                 alert('Failed');
             }
@@ -44,33 +44,42 @@ function Login({ handleLogin }) {
         }
     }
 
+    const toLogin = () => {
+        setLoginform(false);
+    }
+
     return (
         <div className="login-container">
             <h1>Log in</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <h2>Email</h2>
-                    <input 
-                        className='login-input'
-                        type="text"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}>
-                    </input>
+                    <div>
+                        <h2>Email</h2>
+                        <input 
+                            className='login-input'
+                            type="text"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}>
+                        </input>
+                    </div>
+                    <div>
+                        <h2>Password</h2>
+                        <input
+                            className='login-input'
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}>
+                        </input>
+                    </div>
                 </div>
-                <div>
-                    <h2>Password</h2>
-                    <input
-                        className='login-input'
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}>
-                    </input>
-                </div>
-                <h2>Don't have an account?</h2>
-                <Link to='/setting/signup'>Sign up</Link>
                 <button className='login-continue' type='submit'>Continue</button>
+                <hr />
+                <h2>Don't have an account?<span onClick={toLogin}>Sign up</span></h2>
+                {/* <h3 onClick={toLogin} >Sign up</h3> */}
+                {/* <Link to='/setting/signup'>Sign up</Link> */}
+                
             </form>
         </div>
     );

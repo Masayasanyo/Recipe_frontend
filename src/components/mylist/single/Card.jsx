@@ -1,12 +1,16 @@
 import React from 'react';
 import no_image from '../../../assets/no_image.png'
 import { FaLock } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 
-const Card = ({ myRecipe, deleteRecipe }) => {
+const Card = ({ myRecipe }) => {
 
-    const openRecipe = (event) => {
-    }
+    const navigate = useNavigate();
+
+    const openRecipe = () => {
+        navigate("/mylist/recipe", { state: { myRecipe } });
+    };
 
 
     return (
@@ -47,9 +51,6 @@ const Card = ({ myRecipe, deleteRecipe }) => {
             ))}
             </div>
         </div>
-
-        <button className="delete-recipe-button" onClick={() => deleteRecipe(myRecipe.id)}>Delete</button>
-        <button className="card-button">More info</button>
     </div>
     );
 }

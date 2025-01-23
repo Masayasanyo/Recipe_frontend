@@ -3,6 +3,7 @@ import Login from './Login';
 import MyPage from './MyPage';
 import SignUp from './SignUp';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import Welcome from './Welcome';
 
 
 
@@ -16,15 +17,14 @@ function Setting({ isLoggedIn, handleLogin, handleLogout, user }) {
                         isLoggedIn ? (
                             <MyPage handleLogout={handleLogout} user={user} />
                         ) : (
-                            <Navigate to="/setting/login" replace />
+                            <Navigate to="/mypage/login" replace />
                         )
                     }
                 />
                 <Route
                     path="/login"
-                    element={<Login handleLogin={handleLogin} />}
+                    element={<Welcome handleLogin={handleLogin} />}
                 />
-                <Route path="/signup" element={<SignUp handleLogin={handleLogin}/>} />
             </Routes>
         </div>
     );

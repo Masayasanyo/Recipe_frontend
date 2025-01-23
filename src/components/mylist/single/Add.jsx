@@ -197,6 +197,9 @@ function SingleAdd ({ user, myList, setMyList, isAdding, setIsAdding }) {
                         <button type='submit' className="add-recipe-apply-button">Apply</button>
                         <button onClick={addCancelRecipe} className="add-recipe-cancel-button">Cancel</button>    
                     </div>
+
+                    <hr />
+                    
                     <div className='add-recipe-form-container' >
                         <div className='add-recipe-first-form'>
 

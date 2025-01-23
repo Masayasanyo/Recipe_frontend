@@ -16,21 +16,21 @@ function Main({ isLoggedIn, handleLogin, handleLogout, user }) {
                 isLoggedIn ? (
                   <Home user={ user } />
                 ) : (
-                  <Navigate to="/setting/login" replace />
+                  <Navigate to="/mypage/login" replace />
                 )
               }
             />
             <Route 
-              path='/myList*' 
+              path='/myList/*' 
                 element={
                   isLoggedIn ? (
                     <MyList user={ user }/>
                   ) : (
-                    <Navigate to="/setting/login" replace />
+                    <Navigate to="/mypage/login" replace />
                   )
                 } 
             />
-            <Route path='/setting/*' element={<Setting isLoggedIn={ isLoggedIn } handleLogin={ handleLogin } handleLogout={ handleLogout } user={ user }/>} />
+            <Route path='/mypage/*' element={<Setting isLoggedIn={ isLoggedIn } handleLogin={ handleLogin } handleLogout={ handleLogout } user={ user }/>} />
         </Routes> 
     </div>
   );

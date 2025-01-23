@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-function SignUp({ handleLogin }) {
+function SignUp({ handleLogin, setLoginform }) {
 
     const navigate = useNavigate();
     
@@ -38,7 +38,7 @@ function SignUp({ handleLogin }) {
                 const data = await response.json();
                 alert(`Success!: ${data.user.username}`);
                 handleLogin(data.user);
-                navigate('/setting');
+                navigate('/');
             } else {
                 alert('Failed');
             }
@@ -48,44 +48,49 @@ function SignUp({ handleLogin }) {
         }
     }
 
+    const toSignup = () => {
+        setLoginform(true);
+    }
+
     return (
-        <div className="signUp-container">
-            <div>
-                <h1>Sign up</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <h2>Username</h2>
-                        <input 
-                            className='signup-input'
-                            type="text"
-                            name="userName"
-                            value={formData.userName}
-                            onChange={handleChange}>
-                        </input>
-                    </div>
-                    <div>
-                        <h2>Email</h2>
-                        <input 
-                            className='signup-input'
-                            type="text"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}>
-                        </input>
-                    </div>
-                    <div>
-                        <h2>Password</h2>
-                        <input
-                            className='signup-input'
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}>
-                        </input>
-                    </div>
-                    <button className='signup-continue' type='submit'>Continue</button>
-                </form>
-            </div>
+        <div className="signup-container">
+            <h1>Sign up</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <h2>Username</h2>
+                    <input 
+                        className='signup-input'
+                        type="text"
+                        name="userName"
+                        value={formData.userName}
+                        onChange={handleChange}>
+                    </input>
+                </div>
+                <div>
+                    <h2>Email</h2>
+                    <input 
+                        className='signup-input'
+                        type="text"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}>
+                    </input>
+                </div>
+                <div>
+                    <h2>Password</h2>
+                    <input
+                        className='signup-input'
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}>
+                    </input>
+                </div>
+                <button className='signup-continue' type='submit'>Continue</button>
+                <hr />
+                <h2 onClick={toSignup}>If you already have an account<span>Log in</span></h2>
+                
+            </form>
         </div>
     );
 }
