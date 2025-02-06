@@ -1,0 +1,6 @@
+.publicList {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px 150px 40px 150px;
+    gap: 40px;
+}

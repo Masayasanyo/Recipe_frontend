@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    padding-left: 150px;
+    gap: 20px;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px 150px 40px 150px;
+    gap: 40px;
+}
+
+.single {
+    height: 100vh;
+}

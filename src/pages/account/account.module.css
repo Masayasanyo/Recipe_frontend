@@ -1,0 +1,43 @@
+.accountContainer {
+    width: 1300px;
+    padding-left: 150px;
+    margin-bottom: 200px;
+}
+
+.accountContainer form {
+    display: flex;
+    flex-direction: column;
+}
+
+.accountInput {
+    height: 30px;
+    width: 370px;
+    border-radius: 20px;
+    border: 2px solid #c3c6ce;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.accountContainer h2 {
+    font-size: 1.4rem;
+}
+
+.accountContainer button {
+    background-color: #73BBA3;
+    border: 2px solid #c3c6ce;
+    color: #f5f5f5;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.accountContainer hr {
+    border: 1px solid #73BBA3;
+    margin: 40px 0px 40px 0px;
+}

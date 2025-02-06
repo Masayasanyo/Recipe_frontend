@@ -1,0 +1,103 @@
+.addFormInput {
+    border-radius: 10px;
+    border: 2px solid #c3c6ce;
+    padding-left: 10px;
+    height: 30px;
+    width: 300px;
+    margin-top: 5px;
+}
+
+.description {
+    height: 70px;
+    width: 300px;
+    border-radius: 20px;
+    border: 2px solid #c3c6ce;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.ingredientForm {
+    display: flex;
+    gap: 10px;
+}
+
+.new {
+    background-color: white;
+    border: 2px solid #c3c6ce;
+    color: #73BBA3;
+    font-weight: bold;
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ingredientForm input {
+    width: 150px;
+    border-radius: 10px;
+    border: 2px solid #c3c6ce;
+    padding-left: 10px;
+    height: 30px;
+    margin-top: 5px;
+}
+
+.cancel {
+    background-color: white;
+    border: 2px solid #c3c6ce;
+    color: #73BBA3;
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    border-radius: 20px;
+    margin-top: 8px;
+    margin-bottom: auto;
+}
+  
+.labelForm {
+    display: flex;
+    gap: 10px;
+}
+
+.labelForm input {
+    width: 160px;
+    border-radius: 10px;
+    border: 2px solid #c3c6ce;
+    padding-left: 10px;
+    height: 30px;
+    margin-top: 5px;
+}
+
+.processForm {
+    display: flex;
+    gap: 10px;
+}
+
+.processForm textarea {
+    height: 50px;
+    width: 280px;
+    border-radius: 20px;
+    border: 2px solid #c3c6ce;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.time {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.time input {
+    width: 120px;
+}
