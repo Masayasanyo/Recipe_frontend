@@ -10,7 +10,7 @@
 .description {
     height: 70px;
     width: 300px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: 2px solid #c3c6ce;
     padding: 10px;
     margin-top: 5px;
@@ -19,6 +19,12 @@
 .container {
     display: flex;
     flex-direction: column;
+}
+
+.imageInputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .ingredientForm {
@@ -31,14 +37,12 @@
     border: 2px solid #c3c6ce;
     color: #73BBA3;
     font-weight: bold;
-    font-size: 2rem;
-    width: 40px;
-    height: 40px;
+    font-size: 1.2rem;
+    width: 30px;
+    height: 30px;
     padding: 0px;
     border-radius: 10px;
     margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .ingredientForm input {
@@ -55,12 +59,12 @@
     border: 2px solid #c3c6ce;
     color: #73BBA3;
     font-weight: bold;
-    font-size: 1.5rem;
-    width: 30px;
-    height: 30px;
+    font-size: 1.2rem;
+    width: 25px;
+    height: 25px;
     padding: 0px;
     border-radius: 20px;
-    margin-top: 8px;
+    margin-top: auto;
     margin-bottom: auto;
 }
   

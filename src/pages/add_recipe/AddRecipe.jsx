@@ -1,16 +1,20 @@
 import React, { useState, useContext } from 'react';
-import Switch from '../switch/PrivateSwitch';
+import Switch from '../../components/switch/PrivateSwitch';
 import styles from './add_recipe.module.css';
-import TitleInput from '../input/TitleInput';
-import ImageInput from '../input/ImageInput';
-import DescriptionInput from '../input/DescriptionInput';
-import TimeInput from '../input/TimeInput';
-import LabelInput from '../input/LabelInput';
-import IngredientInput from '../input/IngredientsInput';
-import ProcessInput from '../input/ProcessInput';
+import TitleInput from './components/TitleInput';
+import ImageInput from './components/ImageInput';
+import DescriptionInput from './components/DescriptionInput';
+import TimeInput from './components/TimeInput';
+import LabelInput from './components/LabelInput';
+import IngredientInput from './components/IngredientsInput';
+import ProcessInput from './components/ProcessInput';
 import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-function SingleAdd ({ myList, setMyList, setIsAdding }) {
+
+function AddRecipe () {
+
+    const navigate = useNavigate();
 
     const { user } = useContext(AuthContext);
 
@@ -34,17 +38,38 @@ function SingleAdd ({ myList, setMyList, setIsAdding }) {
     }
 
     const addCancelRecipe  = () => {
-        setIsAdding(false);
+        navigate('/single');
     }
-
 
     const addSubmit  = async (event) => {
         event.preventDefault();
 
+        var imageUrl = '';
+
+        if (formData.recipeImage) {
+            try {
+                const uploadData = new FormData();
+                uploadData.append('image', formData.recipeImage);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/recipe/add/image`, {
+                    method: 'POST', 
+                    body: uploadData, 
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    imageUrl = data.url;
+                    console.log(imageUrl);
+                } else {
+                    console.log('Failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                console.log('Server error');
+            }
+        }
+
         // Add into database
         try {
-            const data = {"public_private": formData.recipePublic, "accountId": user.id, "title": formData.recipeName, "image": formData.recipeImage, "time": formData.recipeTime, "description": formData.recipeDescription, "ingredient": formData.recipeIngredient, "process": formData.recipeProcess, "label": formData.recipeLabel}
-            const updatedList = [...myList, data];
+            const data = {"public_private": formData.recipePublic, "accountId": user.id, "title": formData.recipeName, "image": imageUrl, "time": formData.recipeTime, "description": formData.recipeDescription, "ingredient": formData.recipeIngredient, "process": formData.recipeProcess, "label": formData.recipeLabel}
             console.log(data);
             const response = await fetch(`${process.env.REACT_APP_API_URL}/recipe/add`, {
                 method: 'POST', 
@@ -56,28 +81,6 @@ function SingleAdd ({ myList, setMyList, setIsAdding }) {
             if (response.ok) {
                 const data = await response.json();
                 console.log(`Success!: ${data.name}`);
-                setMyList(updatedList);
-            } else {
-                console.log('Failed');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            console.log('Server error');
-        }
-
-        // Fetch new data
-        try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/recipe/mylist`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }, 
-                body: JSON.stringify({"account_id": user.id}), 
-            });
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data.recipe);
-                setMyList(data.recipe);
             } else {
                 console.log('Failed');
             }
@@ -97,7 +100,8 @@ function SingleAdd ({ myList, setMyList, setIsAdding }) {
             recipeIngredient: [{"name": "", "quantity": ""}], 
             recipeProcess: [{"step": 0, "name": ""}], 
         });
-        setIsAdding(false);
+
+        navigate('/single');
     }
     
     return (
@@ -109,17 +113,19 @@ function SingleAdd ({ myList, setMyList, setIsAdding }) {
             <div className={styles.form} >
                 <div className={styles.formOne}>
                     <Switch formData={formData} setFormData={setFormData} />
-                    <TitleInput formData={formData} addChange={addChange} />
                     <ImageInput formData={formData} setFormData={setFormData} />
+                    <TitleInput formData={formData} addChange={addChange} />
                     <DescriptionInput formData={formData} addChange={addChange} />
                     <TimeInput formData={formData} addChange={addChange} />
                 </div>
-                <LabelInput formData={formData} setFormData={setFormData} />
-                <IngredientInput formData={formData} setFormData={setFormData} />
-                <ProcessInput formData={formData} setFormData={setFormData}/>
+                <div className={styles.formTwo}>
+                    <LabelInput formData={formData} setFormData={setFormData} />
+                    <IngredientInput formData={formData} setFormData={setFormData} />
+                    <ProcessInput formData={formData} setFormData={setFormData}/>
+                </div>
             </div>
         </form>
     )
 }
 
-export default SingleAdd;
+export default AddRecipe;

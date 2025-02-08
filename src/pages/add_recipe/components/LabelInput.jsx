@@ -24,6 +24,7 @@ function LabelInput({formData, setFormData}) {
     const addCancelLabel  = (event, index) => {
         event.preventDefault();
         const updatedLabel = labelInput.filter((_, i) => i !== index);
+        setLabelInput(updatedLabel);
         setFormData({
             ...formData,
             recipeLabel: updatedLabel, 

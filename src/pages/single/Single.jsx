@@ -1,19 +1,19 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Card from '../../components/card/RecipeCard';
 import Input from '../../components/search/SearchInput'
-import Add from '../../components/add/AddRecipe'
 import Button from '../../components/button/PlusButton'
 import { AuthContext } from '../../context/AuthContext';
 import styles from './single.module.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function Single () {
 
     const { user } = useContext(AuthContext);
     const [myList, setMyList] = useState([]);
-    const [isAdding, setIsAdding] = useState(false);
+    const navigate = useNavigate();
     const addRecipe  = () => {
-        setIsAdding(!isAdding);
+        navigate('/add_recipe');
     }
 
     useEffect(() => {
@@ -45,10 +45,7 @@ function Single () {
     return (
         <div className={styles.single}>
             <div className={styles.header} >
-                <Input user={user} myList={myList} setMyList={setMyList} />
-                {isAdding && (
-                    <Add myList={myList} setMyList={setMyList} setIsAdding={setIsAdding}/>
-                )}                
+                <Input user={user} myList={myList} setMyList={setMyList} />             
                 <Button addRecipe={addRecipe} />
             </div>
             <div className={styles.list} >

@@ -1,169 +1,75 @@
-import React, { useState } from 'react';
-import Switch from '../../components/switch/PrivateSwitch';
+import React from 'react';
+import no_image from '../../assets/no_image.png'
+import { FaLock } from "react-icons/fa";
 import { useLocation, useNavigate } from 'react-router-dom';
-import TitleInput from './components/TitleInput';
-import ImageInput from './components/ImageInput';
-import DescriptionInput from './components/DescriptionInput';
-import TimeInput from './components/TimeInput';
-import LabelInput from './components/LabelInput';
-import IngredientInput from './components/IngredientsInput';
-import ProcessInput from './components/ProcessInput';
-import styles from './recipe.module.css';
-import IntoSet from './components/IntoSet';
-
+import styles from './recipe.module.css'
 
 const Recipe = () => {
 
+    const navigate = useNavigate();
     const location = useLocation();
     const { myRecipe } = location.state || {};
-    const navigate = useNavigate();
-    const backHome = () => {
-        navigate("/single");
+
+    const openRecipe = () => {
+        navigate("/recipe_eddit", { state: { myRecipe } });
     };
 
-
-    var labelsList = [];
-    for (var i = 0; i < myRecipe.label.length; i++) {
-        labelsList.push(myRecipe.label[i].name);
-    }
-
-    const [formData, setFormData] = useState({
-        recipeSetId: myRecipe.setId, 
-        recipePublic: myRecipe.public, 
-        recipeName: myRecipe.name, 
-        recipeImage: myRecipe.image, 
-        recipeDescription: myRecipe.description,
-        recipeTime: myRecipe.time, 
-        recipeIngredient: myRecipe.ingredient, 
-        recipeProcess: myRecipe.process, 
-        recipeLabel: labelsList,
-    });
-
-    const addChange = (event) => {
-        if (event.target) {
-            let { name, value } = event.target;
-            setFormData({
-                ...formData,
-                [name]: value, 
-            });
-        }
-        else {
-            setFormData({
-                ...formData,
-                recipeSetId: event, 
-            });
-            console.log(event);
-        }
-    }
-
-
-    const deleteRecipe = async () => {
-        const data = {recipe_id: myRecipe.id};
-        console.log(data);
-
-        try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/recipe/single`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                }, 
-                body: JSON.stringify(data), 
-            });
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data.data[0]);
-                console.log(`Deleted successfully: ${data.data[0].name}`);
-                backHome();
-            } else {
-                console.log('Failed');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            console.log('Server error');
-        }
-    }
-
-    const addSubmit  = async (event) => {
-        event.preventDefault();
-      
-        // Add into database
-        try {
-            const data = {"set_id": formData.recipeSetId, "public_private": formData.recipePublic, "accountId": myRecipe["account_id"], "recipeId":myRecipe["id"], "title": formData.recipeName, "image": formData.recipeImage, "time": formData.recipeTime, "description": formData.recipeDescription, "ingredient": formData.recipeIngredient, "process": formData.recipeProcess, "label": formData.recipeLabel}
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/recipe/edit`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }, 
-                body: JSON.stringify(data), 
-            });
-            if (response.ok) {
-                const data = await response.json();
-                console.log(`Success!: ${data.name}`);
-            } else {
-                console.log('Failed');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            console.log('Server error');
-        }
-
-        // Fetch new data
-        try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/recipe/mylist`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }, 
-                body: JSON.stringify({"account_id": myRecipe.account_id}), 
-            });
-            if (response.ok) {
-                const data = await response.json();
-                console.log(`Success!`);
-                console.log(data.recipe);
-                backHome();
-            } else {
-                console.log('Failed');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            console.log('Server error');
-        }
-
-        // Reset the form data
-        setFormData({
-            recipeSetId: myRecipe.setId, 
-            recipePublic: myRecipe.public, 
-            recipeName: myRecipe.name, 
-            recipeImage: myRecipe.image, 
-            recipeDescription: myRecipe.description,
-            recipeTime: myRecipe.time, 
-            recipeIngredient: myRecipe.ingredient, 
-            recipeProcess: myRecipe.process, 
-            recipeLabel: labelsList,
-        });
-    }
-    
+    console.log(myRecipe);
 
     return (
-        <form onSubmit={addSubmit} className={styles.editRecipeContainer} >
-            <div className={styles.editRecipeFormContainer} >
-                <div>
-                    <Switch formData={formData} setFormData={setFormData} />
-                    <TitleInput formData={formData} addChange={addChange} />
-                    <ImageInput formData={formData} setFormData={setFormData} />
-                    <DescriptionInput formData={formData} addChange={addChange} />
-                    <TimeInput formData={formData} addChange={addChange} />
-                    <IntoSet formData={formData} addChange={addChange} />
+        <div className={styles.card} onClick={openRecipe}>
+            <div className={styles.recipeButtonContainer}>
+                <button className={styles.recipeButton} >Edit</button>
+            </div>
+            <div className={styles.recipeContainer}>
+                <div className={styles.recipeContainerOne} >
+                    <div>
+                        {!myRecipe.public && (<FaLock />)}
+                        <h2>{myRecipe.name}</h2>
+                        <hr/>
+                        <p>{myRecipe.description}</p>
+                        <hr />
+                        <h3>{myRecipe.time !== 0 ? myRecipe.time : '_'} minute</h3>
+                        <hr/>
+                        <div className={styles.labelContainer} >
+                            {myRecipe.label.map((l) => (
+                                l.name&&
+                                <p className={styles.label} key={l.id}>{l.name}</p>
+                            ))}
+                        </div>
+                    </div>             
+
+                    <img width='600px' height='400px'
+                        src={myRecipe.image ? myRecipe.image : no_image} 
+                        alt={myRecipe.name} 
+                    />
                 </div>
-                <LabelInput formData={formData} setFormData={setFormData} myRecipe={myRecipe}/>
-                <IngredientInput formData={formData} setFormData={setFormData} myRecipe={myRecipe}/>
-                <ProcessInput formData={formData} setFormData={setFormData} myRecipe={myRecipe}/>
+
+                <hr />
+
+                <div className={styles.recipeContainerTwo}>
+                    <div className={styles.ingredient}>
+                        <h3>Ingredients</h3>
+                        <ul>
+                        {myRecipe.ingredient.map((m) => (
+                            m.name &&
+                            <li key={m.id}>{m.name} … {m.quantity}</li>
+                        ))}
+                        </ul>
+                    </div>
+                    <div className={styles.process}>
+                        <h3>Process</h3>
+                        <div>
+                        {myRecipe.process.map((p) => (
+                            p.name &&
+                            <p key={p.id}>{p.step}. {p.name}</p>
+                        ))}
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div className={styles.editRecipeButtonContainer}>               
-                <button type='submit' className="edit-recipe-apply-button">Apply</button>
-                <button id={styles.deleteRecipeButton} onClick={deleteRecipe} >Delete</button>
-            </div>
-        </form>    
+        </div>
     );
 }
 

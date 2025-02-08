@@ -1,29 +1,37 @@
-.editRecipeContainer {
-    background-color: #f5f5f5;
-    border-radius: 20px;
+.card {
+    margin-left: 150px;
+    margin-right: 150px;
+    border-radius: 15px;
+    background: #f5f5f5;
+    border: 3px solid #73BBA3;
+    padding: 20px 100px 20px 100px;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.1);
+}
+
+.labelContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.label {
     border: 2px solid #73BBA3;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    display: flex;
-    gap: 40px;
-    gap: 0px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+}
+
+.recipeContainer {
+    /* display: flex;
     flex-direction: column;
-    margin: 50px 150px 100px 150px;
-    padding: 50px 20px 50px 20px;
-    color: black;
+    gap: 100px; */
 }
 
-.editRecipeButtonContainer {
+.recipeButtonContainer {
     display: flex;
-    gap: 50px;
-    margin-top: 100px;
-    margin-left: auto;
-    margin-right: auto;
+    justify-content: flex-end;
 }
 
-.editRecipeButtonContainer button{
-    background-color: white;
+
+.recipeButton {
     border: 2px solid #c3c6ce;
     color: #73BBA3;
     font-weight: bold;
@@ -35,24 +43,23 @@
     font-weight: bold;
 }
 
-.deleteRecipeButton {
-    background-color: red;
-    border: 2px solid #c3c6ce;
-    color: #f5f5f5;
-    font-weight: bold;
-    font-size: 1rem;
-    width: 100px;
-    height: 40px;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    margin: 0px auto 0px auto;
+.recipeContainerOne {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
-.editRecipeFormContainer {
-    display: flex;
-    gap: 50px;
-    margin: 0px auto 0px auto;
+.recipeContainerOne img {
+    margin-left: auto;
 }
 
+.recipeContainerTwo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 
+.ingredient {}
+
+.process {
+    
+}
+  

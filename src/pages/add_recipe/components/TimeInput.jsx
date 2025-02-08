@@ -3,7 +3,6 @@ import styles from './input.module.css'
 function TimeInput({formData, addChange}) {
     return (
         <div>
-            <p>Time</p>
             <div className={styles.time}>
                 <input 
                     className={styles.addFormInput}

@@ -1,33 +1,36 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import './styles/styles.module.css';
-import Header from './components/header/Header';
-import Home from './pages/home/Home';
-import Single from './pages/single/Single';
-import Set from './pages/set/Set';
-import Recipe from './pages/recipe/Recipe';
-import SetEdit from './pages/set_edit/SetEdit';
-import PublicList from './pages/public_list/PublicList';
-import PublicRecipe from './pages/public_recipe/PublicRecipe';
-import Login from './pages/login/Login';
-import SignUp from './pages/sign_up/SignUp';
-import Account from './pages/account/Account';
-import Footer from './components/footer/Footer';
-import AuthProvider from './context/AuthContext';
-import PrivateRoute from './context/PrivateRoute';
-
+import styles from './styles/styles.module.css';
+import Header from './components/header/Header.jsx';
+import Home from './pages/home/Home.jsx';
+import Single from './pages/single/Single.jsx';
+import Set from './pages/set/Set.jsx';
+import Recipe from './pages/recipe/Recipe.jsx';
+import SetEdit from './pages/set_edit/SetEdit.jsx';
+import PublicList from './pages/public_list/PublicList.jsx';
+import PublicRecipe from './pages/public_recipe/PublicRecipe.jsx';
+import Login from './pages/login/Login.jsx';
+import SignUp from './pages/sign_up/SignUp.jsx';
+import Account from './pages/account/Account.jsx';
+import Footer from './components/footer/Footer.jsx';
+import AuthProvider from './context/AuthContext.js';
+import PrivateRoute from './context/PrivateRoute.jsx';
+import AddRecipe from './pages/add_recipe/AddRecipe.jsx';
+import RecipeEdit from './pages/recipe_edit/RecipeEdit.jsx';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <div>
+        <div className={styles.App}>
           <Header/>
           <Routes>
             <Route path='/' element={<PrivateRoute><Home /></PrivateRoute>} />
             <Route path='/single' element={<PrivateRoute><Single /></PrivateRoute>} />
             <Route path='/set' element={<PrivateRoute><Set /></PrivateRoute>} />
             <Route path='/recipe' element={<PrivateRoute><Recipe /></PrivateRoute>} />
+            <Route path='/recipe_edit' element={<PrivateRoute><RecipeEdit /></PrivateRoute>} />
+            <Route path='/add_recipe' element={<PrivateRoute><AddRecipe /></PrivateRoute>} />
             <Route path='/set_edit' element={<PrivateRoute><SetEdit /></PrivateRoute>} />
             <Route path='/public_list' element={<PrivateRoute><PublicList /></PrivateRoute>} />
             <Route path='/public_recipe' element={<PrivateRoute><PublicRecipe /></PrivateRoute>} />

@@ -16,20 +16,21 @@ const Card = ({ myRecipe }) => {
         <div className={styles.card} onClick={openRecipe}>
             {!myRecipe.public && (<FaLock />)}
             <h2>{myRecipe.name}</h2>
-            <hr/>
+            {/* <hr/>
             <div className={styles.labelContainer} >
             {myRecipe.label.map((l) => (
+                l.name&&
                 <p className={styles.label} key={l.id}>{l.name}</p>
             ))}
-            </div>
+            </div> */}
             <hr/>
 
-            <img height='200px' 
+            <img width='300px'
                 src={myRecipe.image ? myRecipe.image : no_image} 
                 alt={myRecipe.name} />
 
-            <hr/>
-            <h3>{myRecipe.time} minute</h3>
+            {/* <hr/> */}
+            {/* <h3>{myRecipe.time !== 0 ? myRecipe.time : '_'} minute</h3>
             <hr/>
             <p>{myRecipe.description}</p>
             <hr/>
@@ -37,6 +38,7 @@ const Card = ({ myRecipe }) => {
                 <h3>Ingredients</h3>
                 <ul>
                 {myRecipe.ingredient.map((m) => (
+                    m.name &&
                     <li key={m.id}>{m.name} … {m.quantity}</li>
                 ))}
                 </ul>
@@ -46,10 +48,11 @@ const Card = ({ myRecipe }) => {
                 <h3>Process</h3>
                 <div>
                 {myRecipe.process.map((p) => (
+                    p.name &&
                     <p key={p.id}>{p.step}. {p.name}</p>
                 ))}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
