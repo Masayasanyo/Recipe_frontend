@@ -4,25 +4,23 @@ import styles from './input.module.css'
 function ImageInput({formData, setFormData}) {
 
     const [file, setFile] = useState({
-        preview: '', 
-        raw: '', 
+        preview: formData.recipeImage, 
+        raw: null, 
     });
 
     const addImageChange = (event) => {
-        console.log(event.target.files);
-        console.log(URL.createObjectURL(event.target.files[0]));
         setFile({
             preview: URL.createObjectURL(event.target.files[0]), 
             raw: event.target.files[0], 
         });
         setFormData({
             ...formData,
-            recipeImage: file.raw, 
+            recipeImage: event.target.files[0], 
         });
     }
 
     return (
-        <div>
+        <div className={styles.imageInputContainer}>
             <p>Image</p>
             <input 
                 type='file' 
@@ -31,7 +29,7 @@ function ImageInput({formData, setFormData}) {
                 name="recipeImage"
                 onChange={addImageChange} 
             />
-            <img src={file} />
+            <img  width='400px' src={file.preview} alt={file.name}/>
         </div>
     )
 }

@@ -29,7 +29,10 @@ function ProcessInput({formData, setFormData, }) {
 
     return (
         <div>
-            <p>Processes</p>
+            <div className={styles.nameAndPlus}>
+                <p>Processes</p>
+                <button onClick={addNewProcess} className={styles.new}>+</button>
+            </div>
             <div className={styles.container}>
                 {processInput.map((process, index) => (
                 <div key={index} className={styles.processForm}>
@@ -43,7 +46,6 @@ function ProcessInput({formData, setFormData, }) {
                     <button onClick={(event) => addCancelProcess(event, index)} className={styles.cancel}>×</button>
                 </div>
                 ))}
-                <button onClick={addNewProcess} className={styles.new}>+</button>
             </div>
         </div>
     )

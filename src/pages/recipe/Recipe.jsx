@@ -11,15 +11,15 @@ const Recipe = () => {
     const { myRecipe } = location.state || {};
 
     const openRecipe = () => {
-        navigate("/recipe_eddit", { state: { myRecipe } });
+        navigate("/recipe_edit", { state: { myRecipe } });
     };
 
     console.log(myRecipe);
 
     return (
-        <div className={styles.card} onClick={openRecipe}>
+        <div className={styles.card}>
             <div className={styles.recipeButtonContainer}>
-                <button className={styles.recipeButton} >Edit</button>
+                <button className={styles.recipeButton} onClick={openRecipe} >Edit</button>
             </div>
             <div className={styles.recipeContainer}>
                 <div className={styles.recipeContainerOne} >

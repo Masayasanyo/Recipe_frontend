@@ -33,7 +33,10 @@ function LabelInput({formData, setFormData}) {
 
     return (
         <div>
-            <p>Label</p>
+            <div className={styles.nameAndPlus}>
+                <p>Label</p>
+                <button onClick={addNewLabel} className={styles.new}>+</button>
+            </div>
             <div className={styles.container}>
                 {labelInput.map((label, index) => (
                 <div key={index} className={styles.labelForm}>
@@ -46,7 +49,6 @@ function LabelInput({formData, setFormData}) {
                     <button onClick={(event) => addCancelLabel(event, index)} className={styles.cancel}>×</button>
                 </div>
                 ))}
-                <button onClick={addNewLabel} className={styles.new}>+</button>
             </div>
         </div>
     )

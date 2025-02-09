@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import styles from '../set.module.css';
+import styles from './detail.module.css';
 
 function SetDetail({set, openSet}) {
 
@@ -36,13 +36,15 @@ function SetDetail({set, openSet}) {
     return (
         <div className={styles.setDetail} onClick={handleClick}>
             <h1>{set.name}</h1>
-            <div>
+            <hr />
+            <div className={styles.recipeList}>
                 {myList && (
-                    myList.map((recipe) =>(
-                        <div>
-                            <h1>{recipe.name}</h1>
-                        </div>
-                    ))
+                myList.map((recipe) =>(
+                    <div className={styles.recipe}>
+                        <img src={recipe.image} />
+                        <h1>{recipe.name}</h1>
+                    </div>
+                ))
                 )}
             </div>
         </div>

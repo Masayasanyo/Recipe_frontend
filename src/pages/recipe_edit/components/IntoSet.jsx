@@ -2,15 +2,14 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 import styles from './input.module.css';
 
-function IntoSet({formData, addChange}) {
+function IntoSet({setSetId}) {
 
     const { user } = useContext(AuthContext);
     const [setList, setSetList] = useState([]);
-    const [setId, setSetId] = useState();
 
     const optionChange = (event) => {
         setSetId(event);
-        addChange(event);
+        console.log(event);
     }
 
     useEffect(() => {
@@ -41,11 +40,12 @@ function IntoSet({formData, addChange}) {
     return (
         <div>
             <p>Add a recipe to the set meals</p>
+            <h2></h2>
             <select onChange={(e) => optionChange(e.target.value)}>
-                <option>None</option>
+                <option value="nothing" >None</option>
                 {setList.length > 0 && (
                     setList.map((set, index) => (
-                    <option key={index} value={set.id} >{set.name}</option>
+                    <option key={set.id} value={set.id} >{set.name}</option>
                     ))
                 )}
             </select>

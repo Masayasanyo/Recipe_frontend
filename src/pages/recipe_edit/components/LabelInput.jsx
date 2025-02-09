@@ -7,7 +7,6 @@ function LabelInput({formData, setFormData, myRecipe}) {
 
     const addLabelChange  = (index, value) => {
         const updatedLabel = [...labelInput];
-        console.log(value);
         updatedLabel[index]["name"] = value;
         setFormData({
             ...formData,
@@ -32,12 +31,15 @@ function LabelInput({formData, setFormData, myRecipe}) {
 
     return (
         <div>
-            <p>Label</p>
+            <div className={styles.nameAndPlus}>
+                <p>Label</p>
+                <button onClick={addNewLabel} className={styles.new}>+</button>
+            </div>
             <div className={styles.container}>
                 {labelInput.map((label, index) => (
                 <div key={index} className={styles.labelForm}>
                     <input 
-                        value={label['name']}
+                        value={label["name"]}
                         placeholder="Add a label"
                         type="text"
                         name="recipeLabel"
@@ -46,7 +48,6 @@ function LabelInput({formData, setFormData, myRecipe}) {
                     <button onClick={(event) => addCancelLabel(event, index)} className={styles.cancel}>×</button>
                 </div>
                 ))}
-                <button onClick={addNewLabel} className={styles.new}>+</button>
             </div>
         </div>
     )

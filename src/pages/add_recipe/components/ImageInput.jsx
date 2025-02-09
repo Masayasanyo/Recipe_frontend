@@ -17,9 +17,6 @@ function ImageInput({formData, setFormData}) {
             ...formData,
             recipeImage: event.target.files[0], 
         });
-
-        console.log(event.target.files[0]);
-
     }
 
     return (

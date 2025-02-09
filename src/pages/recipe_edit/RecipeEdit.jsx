@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Switch from '../../components/switch/PrivateSwitch';
+import Switch from './components/PrivateSwitch';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TitleInput from './components/TitleInput';
 import ImageInput from './components/ImageInput';
@@ -21,13 +21,12 @@ const RecipeEdit = () => {
     };
 
 
-    var labelsList = [];
-    for (var i = 0; i < myRecipe.label.length; i++) {
-        labelsList.push(myRecipe.label[i].name);
-    }
+    // var labelsList = [];
+    // for (var i = 0; i < myRecipe.label.length; i++) {
+    //     labelsList.push(myRecipe.label[i].name);
+    // }
 
     const [formData, setFormData] = useState({
-        recipeSetId: myRecipe.setId, 
         recipePublic: myRecipe.public, 
         recipeName: myRecipe.name, 
         recipeImage: myRecipe.image, 
@@ -35,24 +34,17 @@ const RecipeEdit = () => {
         recipeTime: myRecipe.time, 
         recipeIngredient: myRecipe.ingredient, 
         recipeProcess: myRecipe.process, 
-        recipeLabel: labelsList,
+        recipeLabel: myRecipe.label
     });
 
+    const [setId, setSetId] = useState("nothing");
+
     const addChange = (event) => {
-        if (event.target) {
-            let { name, value } = event.target;
-            setFormData({
-                ...formData,
-                [name]: value, 
-            });
-        }
-        else {
-            setFormData({
-                ...formData,
-                recipeSetId: event, 
-            });
-            console.log(event);
-        }
+        let { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value, 
+        });
     }
 
 
@@ -84,10 +76,33 @@ const RecipeEdit = () => {
 
     const addSubmit  = async (event) => {
         event.preventDefault();
+
+        var imageUrl = '';
+
+        if (formData.recipeImage) {
+            try {
+                const uploadData = new FormData();
+                uploadData.append('image', formData.recipeImage);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/recipe/add/image`, {
+                    method: 'POST', 
+                    body: uploadData, 
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    imageUrl = data.url;
+                    console.log(imageUrl);
+                } else {
+                    console.log('Failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                console.log('Server error');
+            }
+        }
       
         // Add into database
         try {
-            const data = {"set_id": formData.recipeSetId, "public_private": formData.recipePublic, "accountId": myRecipe["account_id"], "recipeId":myRecipe["id"], "title": formData.recipeName, "image": formData.recipeImage, "time": formData.recipeTime, "description": formData.recipeDescription, "ingredient": formData.recipeIngredient, "process": formData.recipeProcess, "label": formData.recipeLabel}
+            const data = {"set_id": setId, "public_private": formData.recipePublic, "accountId": myRecipe["account_id"], "recipeId":myRecipe["id"], "title": formData.recipeName, "image": imageUrl, "time": formData.recipeTime, "description": formData.recipeDescription, "ingredient": formData.recipeIngredient, "process": formData.recipeProcess, "label": formData.recipeLabel}
             const response = await fetch(`${process.env.REACT_APP_API_URL}/recipe/edit`, {
                 method: 'POST',
                 headers: {
@@ -130,7 +145,6 @@ const RecipeEdit = () => {
 
         // Reset the form data
         setFormData({
-            recipeSetId: myRecipe.setId, 
             recipePublic: myRecipe.public, 
             recipeName: myRecipe.name, 
             recipeImage: myRecipe.image, 
@@ -138,29 +152,35 @@ const RecipeEdit = () => {
             recipeTime: myRecipe.time, 
             recipeIngredient: myRecipe.ingredient, 
             recipeProcess: myRecipe.process, 
-            recipeLabel: labelsList,
+            recipeLabel: myRecipe.label,
         });
     }
     
 
     return (
-        <form onSubmit={addSubmit} className={styles.editRecipeContainer} >
-            <div className={styles.editRecipeFormContainer} >
-                <div>
-                    <Switch formData={formData} setFormData={setFormData} />
-                    <TitleInput formData={formData} addChange={addChange} />
-                    <ImageInput formData={formData} setFormData={setFormData} />
-                    <DescriptionInput formData={formData} addChange={addChange} />
-                    <TimeInput formData={formData} addChange={addChange} />
-                    <IntoSet formData={formData} addChange={addChange} />
-                </div>
-                <LabelInput formData={formData} setFormData={setFormData} myRecipe={myRecipe}/>
-                <IngredientInput formData={formData} setFormData={setFormData} myRecipe={myRecipe}/>
-                <ProcessInput formData={formData} setFormData={setFormData} myRecipe={myRecipe}/>
+        <form onSubmit={addSubmit} className={styles.container} >
+            <div className={styles.button}>               
+                <button type='submit'>Apply</button>
+                <button className={styles.deleteButton} onClick={deleteRecipe} >Delete</button>
             </div>
-            <div className={styles.editRecipeButtonContainer}>               
-                <button type='submit' className="edit-recipe-apply-button">Apply</button>
-                <button id={styles.deleteRecipeButton} onClick={deleteRecipe} >Delete</button>
+            <hr />
+            <div className={styles.form} >
+                <div className={styles.formOne}>
+                    <div className={styles.formOneLeft}>
+                        <Switch formData={formData} setFormData={setFormData} />
+                        <TitleInput formData={formData} addChange={addChange} />
+                        <DescriptionInput formData={formData} addChange={addChange} />
+                        <TimeInput formData={formData} addChange={addChange} />
+                        <IntoSet setSetId={setSetId} />
+                    </div>
+                    <ImageInput formData={formData} setFormData={setFormData} />
+                </div>
+                <hr />
+                <div className={styles.formTwo}>
+                    <LabelInput formData={formData} setFormData={setFormData} myRecipe={myRecipe}/>
+                    <IngredientInput formData={formData} setFormData={setFormData} myRecipe={myRecipe}/>
+                    <ProcessInput formData={formData} setFormData={setFormData} myRecipe={myRecipe}/>
+                </div>
             </div>
         </form>    
     );

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Switch = ({formData, setFormData}) => {
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(formData.recipePublic);
   const handleCheckboxChange = (event) => {
       setFormData({
           ...formData,

@@ -107,17 +107,21 @@ function AddRecipe () {
     return (
         <form onSubmit={addSubmit} className={styles.container} >
             <div className={styles.button}> 
-                <button type='submit' className="add-recipe-apply-button">Apply</button>
-                <button onClick={addCancelRecipe} className="add-recipe-cancel-button">Cancel</button>    
+                <button type='submit'>Apply</button>
+                <button type="button" onClick={addCancelRecipe}>Cancel</button>    
             </div>
+            <hr />
             <div className={styles.form} >
                 <div className={styles.formOne}>
-                    <Switch formData={formData} setFormData={setFormData} />
+                    <div className={styles.formOneLeft}>
+                        <Switch formData={formData} setFormData={setFormData} />
+                        <TitleInput formData={formData} addChange={addChange} />
+                        <DescriptionInput formData={formData} addChange={addChange} />
+                        <TimeInput formData={formData} addChange={addChange} />
+                    </div>
                     <ImageInput formData={formData} setFormData={setFormData} />
-                    <TitleInput formData={formData} addChange={addChange} />
-                    <DescriptionInput formData={formData} addChange={addChange} />
-                    <TimeInput formData={formData} addChange={addChange} />
                 </div>
+                <hr />
                 <div className={styles.formTwo}>
                     <LabelInput formData={formData} setFormData={setFormData} />
                     <IngredientInput formData={formData} setFormData={setFormData} />

@@ -40,7 +40,10 @@ function IngredientInput({formData, setFormData}) {
 
     return (
         <div>
-            <p>Ingredients</p>
+            <div className={styles.nameAndPlus}>
+                <p>Ingredients</p>
+                <button onClick={addNewIngredient} className={styles.new}>+</button>
+            </div>
             <div className={styles.container}>
                 {ingredientInput.map((ingredient, index) => (
                 <div key={index} className={styles.ingredientForm}>
@@ -59,7 +62,6 @@ function IngredientInput({formData, setFormData}) {
                     <button onClick={(event) => addCancelIngredient(event, index)} className={styles.cancel}>×</button>
                 </div>
                 ))}
-                <button onClick={addNewIngredient} className={styles.new}>+</button>
             </div>
         </div>
     )

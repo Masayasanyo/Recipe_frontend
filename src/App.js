@@ -17,6 +17,7 @@ import AuthProvider from './context/AuthContext.js';
 import PrivateRoute from './context/PrivateRoute.jsx';
 import AddRecipe from './pages/add_recipe/AddRecipe.jsx';
 import RecipeEdit from './pages/recipe_edit/RecipeEdit.jsx';
+import SetView from './pages/set_view/SetView.jsx';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path='/recipe' element={<PrivateRoute><Recipe /></PrivateRoute>} />
             <Route path='/recipe_edit' element={<PrivateRoute><RecipeEdit /></PrivateRoute>} />
             <Route path='/add_recipe' element={<PrivateRoute><AddRecipe /></PrivateRoute>} />
+            <Route path='/set_view' element={<PrivateRoute><SetView /></PrivateRoute>} />
             <Route path='/set_edit' element={<PrivateRoute><SetEdit /></PrivateRoute>} />
             <Route path='/public_list' element={<PrivateRoute><PublicList /></PrivateRoute>} />
             <Route path='/public_recipe' element={<PrivateRoute><PublicRecipe /></PrivateRoute>} />

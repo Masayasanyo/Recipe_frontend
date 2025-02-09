@@ -18,7 +18,7 @@ function Set () {
     const navigate = useNavigate();
 
     const openSet = (set) => {
-        navigate("/set_edit", { state: { set } });
+        navigate("/set_view", { state: { set } });
     };
 
     useEffect(() => {
