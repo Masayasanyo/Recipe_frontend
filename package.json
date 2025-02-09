@@ -54,7 +54,7 @@
   "devDependencies": {
     "gh-pages": "^6.3.0"
   },
-  "homepage": "https://masayasanyo.github.io/Recipe_frontend/",
+  "homepage": "/Recipe_frontend/",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "type": "module",
