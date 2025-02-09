@@ -93,7 +93,7 @@ function SignUp() {
                     </div>
                     <button type='submit'>Continue</button>
                     <hr />
-                    <h2 onClick={toLogin}>If you already have an account<span>Log in</span></h2>
+                    <h3 className={styles.toLogin} onClick={toLogin}>If you already have an account<span>Log in</span></h3>
                     
                 </form>
             </div>
